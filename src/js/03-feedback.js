@@ -4,6 +4,7 @@ const formRef = document.querySelector('form');
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 //об'єкт для збережено значень з форми
 let formData = {};
+populateForm();
 
 formRef.addEventListener('submit', onFormsubmit);
 formRef.addEventListener('input', throttle(onFormInput, 500));
@@ -12,8 +13,6 @@ formRef.addEventListener('input', evt => {
   formData[evt.target.name] = evt.target.value;
   console.log(formData);
 });
-
-// function populateForm();
 
 function onFormsubmit(evt) {
   evt.preventDefault();
@@ -42,3 +41,10 @@ function populateForm() {
     formData.email = savedMessage.email;
   }
 }
+
+// function populateForm() {
+//   const savedData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+//   if (savedData) {
+//     formData = savedData;
+//   }
+// }
