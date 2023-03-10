@@ -1,10 +1,9 @@
 import throttle from 'lodash.throttle';
 
 const formRef = document.querySelector('form');
-const textareaRef = document.querySelector('textarea');
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 //об'єкт для збережено значень з форми
-const formData = {};
+let formData = {};
 
 formRef.addEventListener('submit', onFormsubmit);
 formRef.addEventListener('input', throttle(onFormInput, 500));
@@ -22,6 +21,8 @@ function onFormsubmit(evt) {
   evt.currentTarget.reset();
   //видаляємо дані з ЛС після відправки
   localStorage.removeItem(LOCALSTORAGE_KEY);
+  console.log(formData);
+  formData = {};
 }
 
 function onFormInput(evt) {
@@ -35,7 +36,9 @@ function populateForm() {
   const localStorageData = localStorage.getItem(LOCALSTORAGE_KEY);
   const savedMessage = JSON.parse(localStorageData);
   if (savedMessage) {
-    textareaRef.value = savedMessage;
-    console.log(savedMessage);
+    formRef.elements.message.value = savedMessage.message;
+    formData.message = savedMessage.message;
+    formRef.elements.email.value = savedMessage.email;
+    formData.email = savedMessage.email;
   }
 }
