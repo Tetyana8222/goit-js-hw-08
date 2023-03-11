@@ -8,11 +8,11 @@ populateForm();
 
 formRef.addEventListener('submit', onFormsubmit);
 formRef.addEventListener('input', throttle(onFormInput, 500));
-//делегування при складній формі заповнення
-formRef.addEventListener('input', evt => {
-  formData[evt.target.name] = evt.target.value;
-  console.log(formData);
-});
+// //делегування при складній формі заповнення
+// // formRef.addEventListener('input', evt => {
+// //   formData[evt.target.name] = evt.target.value;
+// //   console.log(formData);
+// // });
 
 function onFormsubmit(evt) {
   evt.preventDefault();
@@ -25,12 +25,13 @@ function onFormsubmit(evt) {
 }
 
 function onFormInput(evt) {
-  const inputValue = JSON.stringify(formData);
-  localStorage.setItem(LOCALSTORAGE_KEY, inputValue);
-  console.log(formData);
+  formData[evt.target.name] = evt.target.value;
+  // const inputValue = JSON.stringify(formData);
+  localStorage.setItem(LOCALSTORAGE_KEY, formData);
+  // console.log(formData);
 }
 
-//функція для заповнення форми збереженими даними з ЛС (наразі є проблема не зберігаються дані)
+// //функція для заповнення форми збереженими даними з ЛС (наразі є проблема не зберігаються дані)
 function populateForm() {
   const localStorageData = localStorage.getItem(LOCALSTORAGE_KEY);
   const savedMessage = JSON.parse(localStorageData);
@@ -42,9 +43,9 @@ function populateForm() {
   }
 }
 
-// function populateForm() {
-//   const savedData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
-//   if (savedData) {
-//     formData = savedData;
-//   }
-// }
+// // function populateForm() {
+// //   const savedData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+// //   if (savedData) {
+// //     formData = savedData;
+// //   }
+// // }
