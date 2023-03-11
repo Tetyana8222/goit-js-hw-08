@@ -21,7 +21,7 @@ function onFormsubmit(evt) {
   //видаляємо дані з ЛС після відправки
   localStorage.removeItem(LOCALSTORAGE_KEY);
   console.log(formData);
-  // formData = {};
+  formData = {};
 }
 
 function onFormInput(evt) {
