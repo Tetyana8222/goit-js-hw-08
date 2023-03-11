@@ -17,17 +17,17 @@ formRef.addEventListener('input', throttle(onFormInput, 500));
 function onFormsubmit(evt) {
   evt.preventDefault();
   // очищаємо форму після відправки
-  evt.currentTarget.reset();
+  evt.target.reset();
   //видаляємо дані з ЛС після відправки
   localStorage.removeItem(LOCALSTORAGE_KEY);
   console.log(formData);
-  formData = {};
+  // formData = {};
 }
 
 function onFormInput(evt) {
   formData[evt.target.name] = evt.target.value;
   // const inputValue = JSON.stringify(formData);
-  localStorage.setItem(LOCALSTORAGE_KEY, formData);
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formData));
   // console.log(formData);
 }
 
